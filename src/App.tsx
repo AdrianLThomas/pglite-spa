@@ -7,6 +7,7 @@ import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
 import { migrate } from "./app/db/migrate";
 import { todos } from "./app/db/schema";
+import { Repl } from "@electric-sql/pglite-repl";
 
 function App() {
   const client = new PGlite("idb://my-pgdata");
@@ -43,6 +44,8 @@ function App() {
       </p>
       <button onClick={async () => await migrate()}>Let's migrate!</button>
       <button onClick={async () => await handleQuery()}>Let's query!</button>
+
+      <Repl pg={client} />
     </>
   );
 }
