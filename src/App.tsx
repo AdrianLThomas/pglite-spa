@@ -4,20 +4,22 @@ import viteLogo from "/vite.svg";
 import pgliteLogo from "./assets/pglite.svg";
 import "./App.css";
 
-import { PGlite } from "@electric-sql/pglite";
-import { drizzle } from "drizzle-orm/pglite";
 import { migrate } from "./app/db/migrate";
 import { todos } from "./app/db/schema";
-import { addTodoAction, deleteTodoAction } from "./app/db/actions";
-
-const client = new PGlite("idb://my-pgdata");
-const db = drizzle({ client });
+import { addTodoAction, deleteTodoAction, fetchAllTodos } from "./app/db/actions";
 
 function App() {
   const [todoList, setTodoList] = useState<(typeof todos.$inferSelect)[]>([]);
 
   useEffect(() => {
-    migrate();
+    const setup = async () => {
+      await migrate();
+
+      const todoList = await fetchAllTodos();
+      setTodoList(todoList);
+    }
+
+    setup();
   })
 
   const handleAddTodoAction = async (formData: FormData) => {

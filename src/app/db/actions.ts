@@ -2,6 +2,10 @@ import { db } from "./drizzle";
 import { todos } from "./schema";
 import { eq } from "drizzle-orm";
 
+export async function fetchAllTodos() {
+  return db.select().from(todos).orderBy(todos.createdAt);
+}
+
 export async function addTodoAction(formData: FormData) {
   const todo: typeof todos.$inferInsert = {
     content: formData.get("content") as string,

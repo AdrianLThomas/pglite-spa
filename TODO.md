@@ -1,0 +1,2 @@
+- Fix popping when db loading
+    - Also check on initial 8mb download.... for slower connection
