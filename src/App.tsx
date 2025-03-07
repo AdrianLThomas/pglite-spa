@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
+import pgliteLogo from "./assets/pglite.svg";
 import "./App.css";
 
 import { PGlite } from "@electric-sql/pglite";
@@ -12,13 +13,16 @@ const client = new PGlite("idb://my-pgdata");
 const db = drizzle({ client });
 
 function App() {
-
-  const [count, setCount] = useState(0);
+  const [todoList, setTodoList] = useState<(typeof todos.$inferSelect)[]>([]);
 
   const handleQuery = async () => {
     let todoList = await db.select().from(todos).orderBy(todos.createdAt);
-    console.log(todoList)
+    setTodoList(todoList)
   };
+
+  useEffect(() => {
+    migrate();
+  })
 
   return (
     <>
@@ -29,21 +33,19 @@ function App() {
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
+        <a href="https://pglite.dev/" target="_blank">
+          <img src={pgliteLogo} className="logo" alt="PGlite logo" />
+        </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <button onClick={migrate}>Let's migrate!</button>
+      <h1>Vite + React + PGlite</h1>
+
       <button onClick={handleQuery}>Let's query!</button>
+
+      <div className="card">
+        <pre>{JSON.stringify(todoList)}</pre>
+      </div>
+
+      <p>REPL - TODO</p>
     </>
   );
 }
