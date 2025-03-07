@@ -9,15 +9,16 @@ import { migrate } from "./app/db/migrate";
 import { todos } from "./app/db/schema";
 import { Repl } from "@electric-sql/pglite-repl";
 
+const client = new PGlite("idb://my-pgdata");
+const db = drizzle({ client });
+
 function App() {
-  const client = new PGlite("idb://my-pgdata");
-  const db = drizzle({ client });
 
   const [count, setCount] = useState(0);
 
   const handleQuery = async () => {
     let todoList = await db.select().from(todos).orderBy(todos.createdAt);
-    window.alert(todoList)
+    console.log(todoList)
   };
 
   return (
@@ -42,10 +43,10 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <button onClick={async () => await migrate()}>Let's migrate!</button>
-      <button onClick={async () => await handleQuery()}>Let's query!</button>
 
       <Repl pg={client} />
+      <button onClick={migrate}>Let's migrate!</button>
+      <button onClick={handleQuery}>Let's query!</button>
     </>
   );
 }
