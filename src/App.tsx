@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
 import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
+import { migrate } from "./app/db/migrate";
+import { todos } from "./app/db/schema";
 
 function App() {
+  const client = new PGlite("idb://my-pgdata");
+  const db = drizzle({ client });
+
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    const client = new PGlite("idb://my-pgdata");
-    const db = drizzle({ client });
-
-    db.execute(
-      `
-      select 1;
-    `
-    ).then((sql) => console.log({ sql }));
-  });
+  const handleQuery = async () => {
+    let todoList = await db.select().from(todos).orderBy(todos.createdAt);
+    window.alert(todoList)
+  };
 
   return (
     <>
@@ -42,6 +41,8 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <button onClick={async () => await migrate()}>Let's migrate!</button>
+      <button onClick={async () => await handleQuery()}>Let's query!</button>
     </>
   );
 }
