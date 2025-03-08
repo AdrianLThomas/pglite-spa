@@ -3,6 +3,9 @@ import {  use, useState } from "react";
 import { migrate } from "../app/db/migrate";
 import { todos } from "../app/db/schema";
 import { addTodoAction, deleteTodoAction, fetchAllTodos } from "../app/db/actions";
+import { Repl } from "@electric-sql/pglite-repl";
+import { client } from "../app/db/drizzle";
+
 
 const setup = (async () => {
   await migrate();
@@ -40,8 +43,7 @@ export default function Todos() {
           </li>
         ))}
       </ul>
-
-      {/* <p>REPL - TODO</p> */}
+      <Repl pg={client}/>
     </>
   );
 }
