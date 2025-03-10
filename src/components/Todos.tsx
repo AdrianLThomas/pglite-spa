@@ -1,11 +1,10 @@
-import {  use, useState } from "react";
-
+import { use, useState } from "react";
+import "./Todos.css";
 import { migrate } from "../app/db/migrate";
 import { todos } from "../app/db/schema";
 import { addTodoAction, deleteTodoAction, fetchAllTodos } from "../app/db/actions";
 import { Repl } from "@electric-sql/pglite-repl";
 import { client } from "../app/db/drizzle";
-
 
 const setup = (async () => {
   await migrate();
@@ -28,22 +27,33 @@ export default function Todos() {
 
   return (
     <>
-      <form action={handleAddTodoAction}>
-        <input type="text" name="content" required />
+      <form action={handleAddTodoAction} style={{ display: "flex", gap: "10px", justifyContent: "space-between" }}>
+        <input type="text" name="content" style={{ flex: 1 }} required />
         <button type="submit">Add Todo</button>
       </form>
-      <ul>
+
+      <ul style={{ listStyle: "none", padding: 0 }}>
         {todoList.map((todo) => (
-          <li key={todo.id}>
-            <span style={{ marginRight: "10px" }}>{todo.content}</span>
-            <form action={handleDeleteTodoAction} style={{ display: "inline" }}>
+          <li
+            key={todo.id}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "10px",
+              marginBottom: "5px",
+            }}
+          >
+            <span>{todo.content}</span>
+            <form action={handleDeleteTodoAction}>
               <input type="hidden" value={todo.id} name="id" />
               <button type="submit">Delete</button>
             </form>
           </li>
         ))}
       </ul>
-      <Repl pg={client}/>
+
+      <Repl pg={client} />
     </>
   );
 }
