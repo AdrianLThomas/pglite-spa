@@ -1,2 +1,1 @@
-- Import CSV
 - Perform FTS on it? - other "powers" that postgres has over say excel..

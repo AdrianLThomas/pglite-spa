@@ -1,15 +1,24 @@
 import { use, useState } from "react";
 import "./Todos.css";
 import { migrate } from "../app/db/migrate";
-import { todos } from "../app/db/schema";
+import { citizens, todos } from "../app/db/schema";
 import { addTodoAction, deleteTodoAction, fetchAllTodos } from "../app/db/actions";
-import { client } from "../app/db/drizzle";
+import { client, db } from "../app/db/drizzle";
+import { count } from "drizzle-orm";
 
 const setup = (async () => {
   await migrate();
 
   // TODO - refactor
   const seed = async () => {
+    const result = await db.select({count: count()}).from(citizens)
+    if(result[0].count) {
+      console.log('already seeded, skipping')
+      return
+    }
+
+    console.log('fetching CSV and seeding citizens table')
+
     const csvResponse = await fetch('/smart_city_citizen_activity.csv');
 
     await client.query(`
