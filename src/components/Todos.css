@@ -3,10 +3,6 @@ li {
     padding-left: 15px;
 }
 
-/* ul li:nth-child(even) {
-    background-color: red;
-} */
-  
 ul li:nth-child(odd) {
 background-color: #202020;
 }
@@ -16,4 +12,8 @@ background-color: #151515;
 
 form {
     padding: 5px;
+}
+
+.repl {
+    height: 300px;
 }

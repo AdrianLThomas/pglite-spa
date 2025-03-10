@@ -3,8 +3,6 @@ import "./Todos.css";
 import { migrate } from "../app/db/migrate";
 import { todos } from "../app/db/schema";
 import { addTodoAction, deleteTodoAction, fetchAllTodos } from "../app/db/actions";
-import { Repl } from "@electric-sql/pglite-repl";
-import { client } from "../app/db/drizzle";
 
 const setup = (async () => {
   await migrate();
@@ -29,7 +27,7 @@ export default function Todos() {
     <>
       <form action={handleAddTodoAction} style={{ display: "flex", gap: "10px", justifyContent: "space-between" }}>
         <input type="text" name="content" style={{ flex: 1 }} required />
-        <button type="submit">Add Todo</button>
+        <button type="submit">Add</button>
       </form>
 
       <ul style={{ listStyle: "none", padding: 0 }}>
@@ -52,8 +50,6 @@ export default function Todos() {
           </li>
         ))}
       </ul>
-
-      <Repl pg={client} />
     </>
   );
 }
