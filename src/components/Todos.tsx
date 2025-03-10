@@ -3,9 +3,26 @@ import "./Todos.css";
 import { migrate } from "../app/db/migrate";
 import { todos } from "../app/db/schema";
 import { addTodoAction, deleteTodoAction, fetchAllTodos } from "../app/db/actions";
+import { client } from "../app/db/drizzle";
 
 const setup = (async () => {
   await migrate();
+
+  // TODO - refactor
+  const seed = async () => {
+    const csvResponse = await fetch('/smart_city_citizen_activity.csv');
+
+    await client.query(`
+      COPY citizens(id, age, gender, mode_of_transport, work_hours, shopping_hours, entertainment_hours, home_energy_consumption, charging_station_usage, carbon_footprint_kgco2, steps_walked, calories_burned, sleep_hours, social_media_hours, public_events_hours)
+      FROM '/dev/blob'
+      DELIMITER ','
+      CSV HEADER;
+      `, [], {
+      blob: await csvResponse.blob()
+    })
+  }
+
+  seed();
 
   return await fetchAllTodos();
 })()

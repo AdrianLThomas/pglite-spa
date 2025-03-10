@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1741344897825,
-      "tag": "0000_brown_thunderbird",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1741603224903,
-      "tag": "0001_regular_silver_fox",
+      "when": 1741606888201,
+      "tag": "0000_dazzling_baron_strucker",
       "breakpoints": true
     }
   ]
