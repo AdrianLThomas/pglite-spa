@@ -29,7 +29,7 @@ function App() {
       <Suspense fallback={<p>Loading database...</p>}>
         <Todos />
         <div className="repl">
-          <button onClick={() => setIsReplOpen(!isReplOpen)}>REPL</button>
+          <button onClick={() => setIsReplOpen(!isReplOpen)}>💻</button>
           {isReplOpen && <Repl pg={client} />}
         </div>
       </Suspense>
