@@ -1,0 +1,161 @@
+{
+  "id": "b585dbb3-6efc-498f-9c04-e232c68023d3",
+  "prevId": "0dec34b0-d46d-451f-93e1-03f45ab9fda3",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.citizens": {
+      "name": "citizens",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "age": {
+          "name": "age",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gender": {
+          "name": "gender",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mode_of_transport": {
+          "name": "mode_of_transport",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "work_hours": {
+          "name": "work_hours",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shopping_hours": {
+          "name": "shopping_hours",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "entertainment_hours": {
+          "name": "entertainment_hours",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "home_energy_consumption": {
+          "name": "home_energy_consumption",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "charging_station_usage": {
+          "name": "charging_station_usage",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "carbon_footprint_kgCO2": {
+          "name": "carbon_footprint_kgCO2",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "steps_walked": {
+          "name": "steps_walked",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "calories_burned": {
+          "name": "calories_burned",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sleep_hours": {
+          "name": "sleep_hours",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "social_media_hours": {
+          "name": "social_media_hours",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "public_events_hours": {
+          "name": "public_events_hours",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.todos": {
+      "name": "todos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "completed": {
+          "name": "completed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
