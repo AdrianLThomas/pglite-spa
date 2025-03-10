@@ -15,12 +15,13 @@
     "@electric-sql/pglite-repl": "^0.2.17",
     "drizzle-orm": "^0.40.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.3.0"
   },
   "overrides": {
     "@uiw/react-codemirror": "4.23.5"
   },
-  "comments":[
+  "comments": [
     "override '@uiw/react-codemirror' required as it's a bug between repl and codemirror"
   ],
   "devDependencies": {

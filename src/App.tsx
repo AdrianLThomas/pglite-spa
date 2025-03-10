@@ -3,10 +3,12 @@ import viteLogo from "/vite.svg";
 import pgliteLogo from "./assets/pglite.svg";
 import "./App.css";
 
-import Todos from "./components/Todos";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { Repl } from "@electric-sql/pglite-repl";
 import { client } from "./app/db/drizzle";
+import { Link, Route, Routes } from "react-router-dom";
+import TodoPage from "./pages/TodoPage";
+import CitizensPage from "./pages/CitizensPage";
 
 function App() {
   const [isReplOpen, setIsReplOpen] = useState(false);
@@ -26,13 +28,19 @@ function App() {
       </div>
       <h1>Vite + React + PGlite</h1>
 
-      <Suspense fallback={<p>Loading database...</p>}>
-        <Todos />
-        <div className="repl">
-          <button onClick={() => setIsReplOpen(!isReplOpen)}>💻</button>
-          {isReplOpen && <Repl pg={client} />}
-        </div>
-      </Suspense>
+      <Routes>
+        <Route path="/todos" element={<TodoPage />} />
+        <Route path="/citizens" element={<CitizensPage />} />
+      </Routes>
+
+      <div className="repl">
+        <button onClick={() => setIsReplOpen(!isReplOpen)}>💻</button>
+            {isReplOpen && <Repl pg={client} />}
+      </div>
+
+      <nav> 
+        <span>Nav: </span><Link to="/todos">Todos</Link> | <Link to="/citizens">Citizens</Link>
+      </nav>
     </>
   );
 }
