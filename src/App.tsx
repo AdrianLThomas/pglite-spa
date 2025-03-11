@@ -27,6 +27,7 @@ function App() {
       <Suspense fallback={<p>Loading database...</p>}>
         <Todos />
         <div className="repl">
+          <span>REPL (e.g. try: <code>SELECT * from todos</code> or <code>'\dt'</code>)</span>
           <Repl pg={client} />
         </div>
       </Suspense>
