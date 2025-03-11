@@ -24,6 +24,12 @@ function App() {
       </div>
       <h1>Vite + React + PGlite</h1>
 
+      <span>Read the
+        <a href="https://www.adrian-thomas.com/blog/2025-03-10/running-postgres-in-the-browser/" target="_blank"> companion blog post</a> here.
+      </span>
+
+      <hr/>
+
       <Suspense fallback={<p>Loading database...</p>}>
         <Todos />
         <div className="repl">
@@ -31,9 +37,6 @@ function App() {
           <Repl pg={client} />
         </div>
       </Suspense>
-      <span>Read the
-      <a href="https://www.adrian-thomas.com/blog/2025-03-10/running-postgres-in-the-browser/" target="_blank"> companion blog post</a> here.
-    </span>
     </>
   );
 }

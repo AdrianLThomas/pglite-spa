@@ -25,6 +25,7 @@ export default function Todos() {
 
   return (
     <>
+      <h3>To do list:</h3>
       <form action={handleAddTodoAction} style={{ display: "flex", gap: "10px", justifyContent: "space-between" }}>
         <input type="text" name="content" style={{ flex: 1 }} required />
         <button type="submit">Add</button>
