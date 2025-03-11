@@ -4,13 +4,11 @@ import pgliteLogo from "./assets/pglite.svg";
 import "./App.css";
 
 import Todos from "./components/Todos";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { Repl } from "@electric-sql/pglite-repl";
 import { client } from "./app/db/drizzle";
 
 function App() {
-  const [isReplOpen, setIsReplOpen] = useState(false);
-
   return (
     <>
       <div>
@@ -29,8 +27,7 @@ function App() {
       <Suspense fallback={<p>Loading database...</p>}>
         <Todos />
         <div className="repl">
-          <button onClick={() => setIsReplOpen(!isReplOpen)}>💻</button>
-          {isReplOpen && <Repl pg={client} />}
+          <Repl pg={client} />
         </div>
       </Suspense>
     </>
